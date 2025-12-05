@@ -2,6 +2,8 @@
 __pycache__/
 *.py[codz]
 *$py.class
+venv/
+*.py[cod]
 
 # C extensions
 *.so
@@ -205,3 +207,20 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Node/Web
+node_modules/
+dist/
+.env
+
+# Large Data (Do not commit these!)
+backend-ml/data/*/raw_images/
+backend-ml/data/*/dataset_yolo/
+backend-ml/runs/
+*.pt
+*.tflite
+*.json
+
+# OS
+.DS_Store
+Thumbs.db
