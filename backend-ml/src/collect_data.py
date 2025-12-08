@@ -17,10 +17,11 @@ def download_data(country_code):
     queries = []
     if country_code == "KR":
         queries = [
-            "Tteokbokki street food",
-            "Korean Sundae blood sausage",
-            "Samgyeopsal pork belly raw",
-            "Samgyeopsal grilled"
+            "Shin Ramyun korean noodles package",       # Haram Example
+            "Samyang Buldak Carbonara package",         # Halal Example
+            "Binggrae Banana Milk bottle",              # Safe Example
+            "Jinro Soju green bottle",                  # Alcohol Example
+            "Lotte Pepero box"                          # Mushbooh Example
         ]
     elif country_code == "JP":
         queries = ["Takoyaki", "Ramen pork broth"]
@@ -30,6 +31,8 @@ def download_data(country_code):
         return
 
     # 3. Download
+    print(f"📂 Saving images to: {base_dir}")
+    
     for query in queries:
         print(f"📷 Downloading: {query}...")
         downloader.download(
