@@ -21,6 +21,13 @@ function App() {
   const { scanImage, scanResult, boundingBoxes, isScanning, dbSize } = useIngredientScanner();
   const THRESHOLD = 0.50; 
 
+  const videoConstraints = {
+    facingMode: { exact: "environment" }, // Force Back Camera
+    width: { ideal: 1280 },               // Ask for 720p (HD)
+    height: { ideal: 720 }
+  };
+  const [debugLog, setDebugLog] = useState("Ready.");
+
   // 1. Load Resources
   useEffect(() => {
     const loadResources = async () => {
@@ -123,7 +130,9 @@ function App() {
     const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc) {
       setSnapshot(imageSrc);
-      scanImage(imageSrc);
+      setDebugLog("Starting Scan..."); // Reset log
+      // Pass the setter as the callback
+      scanImage(imageSrc, (msg) => setDebugLog(msg));
     }
   }, [webcamRef, scanImage]);
 
@@ -149,12 +158,28 @@ function App() {
                 ref={webcamRef}
                 muted={true}
                 screenshotFormat="image/jpeg"
+                screenshotQuality={0.8}
                 className="camera-feed"
-                videoConstraints={{ facingMode: "environment" }}
+                videoConstraints={videoConstraints}
              />
              {mode === "visual" && <canvas ref={canvasRef} className="drawing-canvas" />}
            </>
         )}
+      </div>
+
+      <div style={{
+        position: 'absolute', 
+        top: '60px', 
+        left: '10px', 
+        zIndex: 999, 
+        color: 'lime', 
+        background: 'rgba(0,0,0,0.7)', 
+        padding: '5px',
+        fontSize: '10px',
+        maxWidth: '200px',
+        pointerEvents: 'none'
+      }}>
+        LOG: {debugLog}
       </div>
 
       <div className="ui-layer">

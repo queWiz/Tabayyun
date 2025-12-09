@@ -23,21 +23,26 @@ export const useIngredientScanner = () => {
     return clean;
   };
 
-  const scanImage = async (originalImageSrc) => {
+  const scanImage = async (originalImageSrc, logCallback) => {
     if (database.length === 0) return;
     setIsScanning(true);
     setScanResult(null);
     setBoundingBoxes([]);
 
+    // Helper to log to console AND UI
+    const log = (msg) => {
+        console.log(msg);
+        if(logCallback) logCallback(msg);
+    };
+
+
     try {
       console.log("📷 Sending RAW Image to Tesseract (Default Mode)...");
+      log("📷 Processing Image...");
 
       const { data } = await Tesseract.recognize(
         originalImageSrc,
-        'eng+kor', 
-        {
-           // NO CONFIG. Let Tesseract decide the best mode (PSM 3).
-        }
+        'eng+kor'
       );
 
       const cleanText = cleanOCRText(data.text); 
@@ -55,6 +60,7 @@ export const useIngredientScanner = () => {
       else if (data.lines && data.lines.length > 0) segments = data.lines;
       else if (data.blocks && data.blocks.length > 0) segments = data.blocks;
       
+      log(`📦 Segments Found: ${segments.length}`);
       console.log(`📦 Using ${segments.length} segments for boxes.`);
       console.log("📝 Raw Text:", cleanText);
 
@@ -106,8 +112,11 @@ export const useIngredientScanner = () => {
           }
         });
         
-        setBoundingBoxes(boxesToDraw);
+        // setBoundingBoxes(boxesToDraw);
       }
+
+      log(`🎯 Risky Boxes: ${boxesToDraw.length}`);
+      setBoundingBoxes(boxesToDraw);
 
     } catch (err) {
       console.error("OCR Error:", err);
