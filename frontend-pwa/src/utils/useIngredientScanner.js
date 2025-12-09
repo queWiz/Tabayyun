@@ -8,7 +8,6 @@ export const useIngredientScanner = () => {
   const [boundingBoxes, setBoundingBoxes] = useState([]);
   const [isScanning, setIsScanning] = useState(false);
   
-  // We remove all scaling logic for this test to keep it raw
   const scaleRef = useRef(1);
 
   useEffect(() => {
@@ -26,6 +25,26 @@ export const useIngredientScanner = () => {
     return clean;
   };
 
+  const resizeImage = (imageSrc) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = imageSrc;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const targetWidth = 800; // Downsample to remove noise
+        const scale = targetWidth / img.width;
+        scaleRef.current = scale; 
+        
+        canvas.width = targetWidth;
+        canvas.height = img.height * scale;
+        
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg'));
+      };
+    });
+  };
+
   const scanImage = async (originalImageSrc, logCallback) => {
     if (database.length === 0) return;
     setIsScanning(true);
@@ -38,43 +57,30 @@ export const useIngredientScanner = () => {
     };
 
     try {
-      report("🧪 DEBUG MODE: Starting...");
+      report("🧪 TEST: Resizing + English Only...");
+      const processedImage = await resizeImage(originalImageSrc);
 
-      // TEST 1: RAW IMAGE (No Canvas processing)
-      // TEST 2: ENGLISH ONLY (Remove 'kor' to test segmentation)
-      // TEST 3: PSM 6 (Assume uniform block)
-      
+      // --- ISOLATION TEST: ENGLISH ONLY ---
+      // If boxes appear now, we know 'eng+kor' was the problem.
       const { data } = await Tesseract.recognize(
-        originalImageSrc,
+        processedImage,
         'eng', 
-        {
-          tessedit_pageseg_mode: '6',
+        { 
+            // Using Default PSM (3) 
         }
       );
 
-      const cleanText = cleanOCRText(data.text);
+      const cleanText = cleanOCRText(data.text); 
       const words = data.words || [];
 
-      // --- CRITICAL DEBUGGING ---
-      console.log("--- RAW DEBUG DATA ---");
-      console.log(`TEXT DETECTED: "${cleanText.substring(0, 50)}..."`);
-      console.log(`WORDS ARRAY LENGTH: ${words.length}`);
-      
-      // Check if HOCR contains bbox coordinates even if words is empty
-      const hasHocrCoordinates = data.hocr && data.hocr.includes("bbox");
-      console.log(`HOCR CONTAINS BBOX? ${hasHocrCoordinates ? "YES" : "NO"}`);
-      
-      if (words.length > 0) {
-          console.log(`FIRST WORD CONFIDENCE: ${words[0].confidence}`);
-          console.log(`FIRST WORD BBOX:`, words[0].bbox);
-      }
-      console.log("----------------------");
+      // Debug: Check if HOCR has coordinates (Backup check)
+      const hasHocrCoords = data.hocr && data.hocr.includes("bbox");
 
-      report(`Stats: ${words.length} words found. HOCR: ${hasHocrCoordinates ? "Yes" : "No"}`);
+      report(`📊 Words: ${words.length} | HOCR Coords: ${hasHocrCoords ? "Yes" : "No"}`);
 
-      // 1. Detection Logic
+      // 1. Detection (Logic still works for codes like E120 even in English mode)
       const fuse = new Fuse(database, {
-        keys: ['code', 'name_en'], // Removed name_kr for English test
+        keys: ['code', 'name_en'], 
         includeScore: true,
         threshold: 0.25, 
         ignoreLocation: true
@@ -112,8 +118,13 @@ export const useIngredientScanner = () => {
           });
 
           if (isRiskySegment && wordObj.bbox) {
-             // Pass Raw Box (No scaling, assuming direct overlay)
-             boxesToDraw.push(wordObj.bbox);
+             const s = scaleRef.current;
+             boxesToDraw.push({
+               x0: wordObj.bbox.x0 / s,
+               y0: wordObj.bbox.y0 / s,
+               x1: wordObj.bbox.x1 / s,
+               y1: wordObj.bbox.y1 / s
+             });
           }
         });
         
