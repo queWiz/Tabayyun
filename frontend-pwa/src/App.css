@@ -19,45 +19,36 @@ body {
 .app-container {
   position: relative;
   width: 100vw;
-  height: 100dvh; /* Changed from 100vh */
+  height: 100dvh; /* Dynamic Height */
   background-color: black;
-  overflow: hidden; /* Stop scrolling/bouncing */
+  overflow: hidden;
 }
 
-/* CAMERA LAYER */
+/* Camera & Canvas */
 .camera-feed, .drawing-canvas {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  object-fit: cover; /* Full screen immersive */
+  object-fit: contain; /* Ensure alignment */
   z-index: 1;
 }
+.drawing-canvas { z-index: 2; pointer-events: none; }
 
-.drawing-canvas {
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* SNAPSHOT WRAPPER (Force Fit) */
+/* Wrapper for Snapshot Alignment */
 .snapshot-wrapper {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5;
+  background: black;
+}
+.snapshot-wrapper img, .snapshot-wrapper canvas {
+  width: 100%; height: 100%; object-fit: contain;
 }
 
-.snapshot-wrapper img, 
-.snapshot-wrapper canvas {
-  width: 100%; 
-  height: 100%; 
-  object-fit: contain; /* Ensure text is readable */
-}
-
-/* UI LAYER */
+/* UI Layer */
 .ui-layer {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -65,16 +56,20 @@ body {
   pointer-events: none;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* Pushes content to edges */
 }
 
-/* HEADER / MODE SWITCHER */
+/* Header Buttons */
 .mode-switcher-container {
   pointer-events: auto;
-  /* Add padding for the "Notch" and Status Bar */
-  padding-top: max(50px, env(safe-area-inset-top)); 
+  padding-top: max(50px, env(safe-area-inset-top));
   display: flex;
   justify-content: center;
+  /* Ensure it stays at top */
+  position: absolute; 
+  top: 0; 
+  width: 100%;
+  z-index: 20;
 }
 
 .mode-switcher {
@@ -105,20 +100,16 @@ body {
 }
 
 /* CAPTURE BUTTON AREA */
-/* BOTTOM CONTROLS AREA */
 .scanner-controls {
   pointer-events: auto;
   width: 100%;
-  
-  /* Lift it up significantly so it sits ABOVE the address bar */
-  padding-bottom: 120px; 
-  
+  padding-bottom: 80px; 
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: auto; 
+  position: absolute;
+  bottom: 0;
+  z-index: 20;
 }
-
 /* THE SHUTTER BUTTON (iOS Style) */
 .capture-btn {
   width: 70px;
@@ -142,21 +133,41 @@ body {
 /* RESULTS MODAL (Apple Style Sheet) */
 .result-modal {
   pointer-events: auto;
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  position: absolute;
+  bottom: 0;        /* Anchor to bottom */
+  left: 0;
+  width: 100%;
+  
+  /* Styling */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border-radius: 20px 20px 0 0;
-  padding: 24px;
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
-  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  max-height: 60vh;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 -5px 30px rgba(0,0,0,0.3);
+  
+  /* SIZING: Never take more than 40% of screen */
+  max-height: 40dvh; 
   display: flex;
   flex-direction: column;
+  z-index: 50;
+  
+  /* Animation */
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideUp {
   from { transform: translateY(100%); }
   to { transform: translateY(0); }
+}
+
+.results-list {
+  overflow-y: auto;
+  flex-grow: 1;
+  margin-bottom: 10px;
+  /* Add padding so text isn't cut off */
+  padding-bottom: 10px;
 }
 
 .results-header {
@@ -172,12 +183,6 @@ body {
   margin: 0;
   font-size: 20px;
   color: var(--text-main);
-}
-
-.results-list {
-  overflow-y: auto;
-  flex-grow: 1;
-  margin-bottom: 20px;
 }
 
 /* RESULT ITEMS */

@@ -158,7 +158,7 @@ function App() {
                 ref={webcamRef}
                 muted={true}
                 screenshotFormat="image/jpeg"
-                screenshotQuality={0.8}
+                // screenshotQuality={0.8}
                 className="camera-feed"
                 videoConstraints={videoConstraints}
              />
