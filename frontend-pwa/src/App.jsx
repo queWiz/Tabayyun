@@ -4,11 +4,12 @@ import * as tf from "@tensorflow/tfjs";
 import { postprocess } from "./utils/yolo_utils";
 import { useIngredientScanner } from "./utils/useIngredientScanner";
 import "./App.css";
+import { HighlightedText } from "./utils/textHighlighter";
+
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null); 
-  const overlayRef = useRef(null); 
   
   const [mode, setMode] = useState("visual"); 
   const [model, setModel] = useState(null);
@@ -18,7 +19,7 @@ function App() {
   
   const [snapshot, setSnapshot] = useState(null); 
 
-  const { scanImage, scanResult, boundingBoxes, isScanning, dbSize } = useIngredientScanner();
+  const { scanImage, scanResult, boundingBoxes, isScanning, dbSize, extractedText } = useIngredientScanner();
   const THRESHOLD = 0.50; 
 
   const videoConstraints = {
@@ -27,6 +28,7 @@ function App() {
     height: { ideal: 720 }
   };
   const [debugLog, setDebugLog] = useState("Ready.");
+
 
   // 1. Load Resources
   useEffect(() => {
@@ -55,35 +57,6 @@ function App() {
     const interval = setInterval(() => detectFrame(), 100); 
     return () => clearInterval(interval);
   }, [model, loading, mode, snapshot]);
-
-  // 3. DRAW OCR BOXES (Debugged)
-  useEffect(() => {
-    if (boundingBoxes.length > 0 && overlayRef.current && snapshot) {
-      const ctx = overlayRef.current.getContext('2d');
-      ctx.clearRect(0, 0, overlayRef.current.width, overlayRef.current.height);
-      
-      const img = new Image();
-      img.src = snapshot;
-      img.onload = () => {
-         // IMPORTANT: Set canvas internal resolution to match the RAW image
-         overlayRef.current.width = img.width;
-         overlayRef.current.height = img.height;
-
-         ctx.strokeStyle = '#ff0000'; 
-         ctx.lineWidth = 10; // Thicker lines for High Res photos
-         ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
-
-         boundingBoxes.forEach(bbox => {
-           // bbox is now raw: {x0, y0, x1, y1}
-           const w = bbox.x1 - bbox.x0;
-           const h = bbox.y1 - bbox.y0;
-           
-           ctx.strokeRect(bbox.x0, bbox.y0, w, h);
-           ctx.fillRect(bbox.x0, bbox.y0, w, h);
-         });
-      };
-    }
-  }, [boundingBoxes, snapshot]);
 
   const detectFrame = async () => {
     if (webcamRef.current && webcamRef.current.video.readyState === 4) {
@@ -148,8 +121,16 @@ function App() {
         {snapshot ? (
            /* SNAPSHOT VIEW */
            <div className="snapshot-wrapper">
-             <img src={snapshot} alt="Captured" className="camera-feed" />
-             <canvas ref={overlayRef} className="drawing-canvas" />
+             {/* Show the photo the user took */}
+             <img src={snapshot} alt="Captured" style={{opacity: 0.4}} /> 
+             
+             {/* Show the TEXT TRANSCRIPT on top */}
+             <div className="text-overlay">
+                <h3>📜 Detected Text:</h3>
+                <div className="scrolled-text">
+                   <HighlightedText text={extractedText} risks={scanResult || []} />
+                </div>
+             </div>
            </div>
         ) : (
            /* LIVE VIEW */
@@ -158,9 +139,8 @@ function App() {
                 ref={webcamRef}
                 muted={true}
                 screenshotFormat="image/jpeg"
-                // screenshotQuality={0.8}
                 className="camera-feed"
-                videoConstraints={videoConstraints}
+                videoConstraints={{ facingMode: "environment" }}
              />
              {mode === "visual" && <canvas ref={canvasRef} className="drawing-canvas" />}
            </>
@@ -230,21 +210,15 @@ function App() {
              
              <div className="results-list">
                {(!scanResult || scanResult.length === 0) ? (
-                  <div className="safe-item">
-                    ✅ Safe to Eat?
-                    <div style={{fontSize:'13px', fontWeight:'normal', marginTop:'5px', color:'var(--safe)'}}>
-                       No common haram ingredients detected.
-                    </div>
-                  </div>
+                  <div className="safe-item">✅ Safe to Eat? (No risks found)</div>
                ) : (
                   <div>
-                    <p style={{fontSize:'13px', color:'var(--text-sub)', marginBottom:'10px'}}>
-                      Detected {scanResult.length} potential issues:
+                    <p style={{color:'#c62828', fontWeight:'bold', margin:'0 0 10px 0'}}>
+                      ⚠️ Found {scanResult.length} Warnings:
                     </p>
                     {scanResult.map((item, idx) => (
                       <div key={idx} className="risk-item">
-                        <span className="risk-name">{item.name_en}</span>
-                        <span className="risk-detail">{item.status} ({item.code || "Ingredient"})</span>
+                        <strong>{item.name_en}</strong> ({item.status})
                       </div>
                     ))}
                   </div>

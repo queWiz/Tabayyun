@@ -248,3 +248,39 @@ body {
   color: white;
   z-index: 100;
 }
+
+/* Text Transcript Overlay */
+.text-overlay {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 90%;
+  height: 50%; /* Only take top half */
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.text-overlay h3 {
+  margin-top: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #aaa;
+  letter-spacing: 1px;
+}
+
+.scrolled-text {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-top: 10px;
+  /* Nice scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #555 transparent;
+}
