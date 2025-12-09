@@ -1,42 +1,241 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* RESET & FONTS */
+:root {
+  --primary: #007AFF; /* Apple Blue */
+  --danger: #FF3B30;  /* Apple Red */
+  --safe: #34C759;    /* Apple Green */
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --text-main: #000000;
+  --text-sub: #8E8E93;
+}
+
+body {
+  margin: 0;
+  background: black;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+/* APP CONTAINER */
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+}
+
+/* CAMERA LAYER */
+.camera-feed, .drawing-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; /* Full screen immersive */
+  z-index: 1;
+}
+
+.drawing-canvas {
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* SNAPSHOT WRAPPER (Force Fit) */
+.snapshot-wrapper {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.snapshot-wrapper img, 
+.snapshot-wrapper canvas {
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; /* Ensure text is readable */
+}
+
+/* UI LAYER */
+.ui-layer {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* HEADER / MODE SWITCHER */
+.mode-switcher-container {
+  pointer-events: auto;
+  padding-top: 50px; /* Space for iPhone Notch */
+  display: flex;
+  justify-content: center;
+}
+
+.mode-switcher {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 4px;
+  border-radius: 100px;
+  display: flex;
+  gap: 5px;
+}
+
+.mode-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn.active {
+  background: white;
+  color: black;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* CAPTURE BUTTON AREA */
+/* BOTTOM CONTROLS AREA */
+.scanner-controls {
+  pointer-events: auto;
+  width: 100%;
+  padding-bottom: 50px; /* Lift it up from bottom edge */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Ensure it sits at the bottom of the flex container */
+  margin-top: auto; 
+}
+
+/* THE SHUTTER BUTTON (iOS Style) */
+.capture-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: white; /* The inner white circle */
+  border: 4px solid rgba(0,0,0,0.5); /* Dark ring around it for contrast */
+  outline: 4px solid white; /* Outer white ring */
+  outline-offset: 2px;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.1s ease;
+}
+
+.capture-btn:active {
+  transform: scale(0.9);
+  background-color: #ddd;
+}
+
+/* RESULTS MODAL (Apple Style Sheet) */
+.result-modal {
+  pointer-events: auto;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px 20px 0 0;
+  padding: 24px;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.results-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--text-main);
+}
+
+.results-list {
+  overflow-y: auto;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+/* RESULT ITEMS */
+.safe-item {
+  background: rgba(52, 199, 89, 0.1);
+  color: var(--safe);
+  padding: 20px;
+  border-radius: 12px;
   text-align: center;
+  font-weight: 600;
+  border: 1px solid rgba(52, 199, 89, 0.2);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.risk-item {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 59, 48, 0.08);
+  border-left: 4px solid var(--danger);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.risk-name {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-main);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.risk-detail {
+  font-size: 13px;
+  color: var(--danger);
+  margin-top: 4px;
 }
 
-.card {
-  padding: 2em;
+/* CLOSE BUTTON */
+.nice-close-btn {
+  width: 100%;
+  padding: 16px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.read-the-docs {
-  color: #888;
+.nice-close-btn:active {
+  opacity: 0.8;
+}
+
+/* LOADING */
+.loading-screen {
+  position: absolute;
+  background: black;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 100;
 }
