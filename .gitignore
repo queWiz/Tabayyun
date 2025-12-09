@@ -219,10 +219,20 @@ backend-ml/data/*/dataset_yolo/
 backend-ml/runs/
 *.pt
 *.tflite
-*.json
 
 # OS
 .DS_Store
 Thumbs.db
 
 backend-ml/models/
+
+# Ignore temp data logs if any
+backend-ml/runs/
+
+# BUT do NOT ignore these specific important files
+!package.json
+!package-lock.json
+!manifest.json
+!products.json
+!additives.json
+!model.json

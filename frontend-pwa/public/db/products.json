@@ -1,0 +1,32 @@
+{
+  "shin_ramyun": {
+    "name_en": "Shin Ramyun",
+    "status": "Haram",
+    "reason": "Contains Beef Bone",
+    "color": "#FF0000"
+  },
+  "buldak_carbonara": {
+    "name_en": "Buldak Carbonara",
+    "status": "Halal",
+    "reason": "Certified Halal",
+    "color": "#00FF00"
+  },
+  "banana_milk": {
+    "name_en": "Banana Milk",
+    "status": "Halal",
+    "reason": "Safe Ingredients",
+    "color": "#00FF00"
+  },
+  "soju": {
+    "name_en": "Jinro Soju",
+    "status": "Haram",
+    "reason": "Alcohol",
+    "color": "#FF0000"
+  },
+  "pepero": {
+    "name_en": "Pepero",
+    "status": "Mushbooh",
+    "reason": "Check Ingredients",
+    "color": "#FFA500"
+  }
+}

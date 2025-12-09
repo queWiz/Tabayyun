@@ -1,0 +1,681 @@
+[
+  {
+    "code": "E120",
+    "name_kr": "코치닐",
+    "name_en": "Cochineal",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "E120",
+    "name_kr": "연지벌레",
+    "name_en": "Carmine",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "E441",
+    "name_kr": "젤라틴",
+    "name_en": "Gelatin",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "E542",
+    "name_kr": "골인산염",
+    "name_en": "Bone Phosphate",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "E904",
+    "name_kr": "쉘락",
+    "name_en": "Shellac",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "E920",
+    "name_kr": "L-시스테인",
+    "name_en": "L-Cysteine",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "E921",
+    "name_kr": "L-시스틴",
+    "name_en": "L-Cystine",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "돼지고기",
+    "name_en": "Pork",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "돈육",
+    "name_en": "Pork Meat",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "돈지",
+    "name_en": "Lard",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "돈창",
+    "name_en": "Pork Intestine",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "베이컨",
+    "name_en": "Bacon",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "햄",
+    "name_en": "Ham",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "소시지",
+    "name_en": "Sausage",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "족발",
+    "name_en": "Pork Trotters",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "PORK",
+    "name_kr": "삼겹살",
+    "name_en": "Pork Belly",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "MEAT",
+    "name_kr": "고기",
+    "name_en": "Meat",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "MEAT",
+    "name_kr": "육수",
+    "name_en": "Meat Broth",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "MEAT",
+    "name_kr": "고기엑기스",
+    "name_en": "Meat Extract",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "BEEF",
+    "name_kr": "쇠고기",
+    "name_en": "Beef",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "BEEF",
+    "name_kr": "우육",
+    "name_en": "Beef Meat",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "BEEF",
+    "name_kr": "우지",
+    "name_en": "Beef Tallow",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "BEEF",
+    "name_kr": "사골",
+    "name_en": "Beef Bone",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "CHICKEN",
+    "name_kr": "닭고기",
+    "name_en": "Chicken",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "CHICKEN",
+    "name_kr": "계육",
+    "name_en": "Chicken Meat",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "알코올",
+    "name_en": "Alcohol",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "에탄올",
+    "name_en": "Ethanol",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "주정",
+    "name_en": "Spirit/Liquor",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "술",
+    "name_en": "Liquor",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "와인",
+    "name_en": "Wine",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "럼",
+    "name_en": "Rum",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "브랜디",
+    "name_en": "Brandy",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "미림",
+    "name_en": "Mirin",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "ALCOHOL",
+    "name_kr": "맛술",
+    "name_en": "Cooking Wine",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "SHORTENING",
+    "name_kr": "쇼트닝",
+    "name_en": "Shortening",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "MARGARINE",
+    "name_kr": "마가린",
+    "name_en": "Margarine",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "RENNET",
+    "name_kr": "렌넷",
+    "name_en": "Rennet",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "PEPSIN",
+    "name_kr": "펩신",
+    "name_en": "Pepsin",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "WHEY",
+    "name_kr": "유청",
+    "name_en": "Whey",
+    "status": "Mushbooh",
+    "risk_level": "Low"
+  },
+  {
+    "code": "TAURINE",
+    "name_kr": "타우린",
+    "name_en": "Taurine",
+    "status": "Mushbooh",
+    "risk_level": "Low"
+  },
+  {
+    "code": "COLLAGEN",
+    "name_kr": "콜라겐",
+    "name_en": "Collagen",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "E422",
+    "name_kr": "글리세린",
+    "name_en": "Glycerol",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E422",
+    "name_kr": "글리세롤",
+    "name_en": "Glycerine",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E470",
+    "name_kr": "지방산염",
+    "name_en": "Fatty Acid Salts",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E471",
+    "name_kr": "글리세린지방산에스테르",
+    "name_en": "Mono-diglycerides",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E472a",
+    "name_kr": "초산모노글리세리드",
+    "name_en": "Acetic Acid Esters",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E472b",
+    "name_kr": "젖산모노글리세리드",
+    "name_en": "Lactic Acid Esters",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E472c",
+    "name_kr": "구연산모노글리세리드",
+    "name_en": "Citric Acid Esters",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E472e",
+    "name_kr": "디아세틸타르타르산",
+    "name_en": "DATEM",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E473",
+    "name_kr": "자당지방산에스테르",
+    "name_en": "Sucrose Esters",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E474",
+    "name_kr": "수크로글리세리드",
+    "name_en": "Sucroglycerides",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E475",
+    "name_kr": "폴리글리세린지방산에스테르",
+    "name_en": "Polyglycerol Esters",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E476",
+    "name_kr": "폴리글리세린축합리시놀레인산에스테르",
+    "name_en": "PGPR",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E477",
+    "name_kr": "프로필렌글리콜지방산에스테르",
+    "name_en": "Propylene Glycol Esters",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E478",
+    "name_kr": "락틸산지방산글리세리드",
+    "name_en": "Lactylated Glycerides",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E481",
+    "name_kr": "스테아릴젖산나트륨",
+    "name_en": "SSL",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E482",
+    "name_kr": "스테아릴젖산칼슘",
+    "name_en": "CSL",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E483",
+    "name_kr": "스테아릴주석산",
+    "name_en": "Stearyl Tartrate",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E491",
+    "name_kr": "소르비탄모노스테아레이트",
+    "name_en": "Sorbitan Monostearate",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E492",
+    "name_kr": "소르비탄트리스테아레이트",
+    "name_en": "Sorbitan Tristearate",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E493",
+    "name_kr": "소르비탄모노라우레이트",
+    "name_en": "Sorbitan Monolaurate",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E494",
+    "name_kr": "소르비탄모노올레에이트",
+    "name_en": "Sorbitan Monooleate",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E495",
+    "name_kr": "소르비탄모노팔미테이트",
+    "name_en": "Sorbitan Monopalmitate",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E570",
+    "name_kr": "지방산",
+    "name_en": "Fatty Acids",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E572",
+    "name_kr": "스테아린산마그네슘",
+    "name_en": "Magnesium Stearate",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E631",
+    "name_kr": "이노신산나트륨",
+    "name_en": "Disodium Inosinate",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "E635",
+    "name_kr": "5-리보뉴클레오티드이나트륨",
+    "name_en": "Disodium Ribonucleotides",
+    "status": "Mushbooh",
+    "risk_level": "High"
+  },
+  {
+    "code": "E640",
+    "name_kr": "글리신",
+    "name_en": "Glycine",
+    "status": "Mushbooh",
+    "risk_level": "Medium"
+  },
+  {
+    "code": "E100",
+    "name_kr": "강황",
+    "name_en": "Curcumin",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E101",
+    "name_kr": "리보플라빈",
+    "name_en": "Riboflavin",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E102",
+    "name_kr": "타르트라진",
+    "name_en": "Tartrazine",
+    "status": "Mushbooh",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E110",
+    "name_kr": "황색5호",
+    "name_en": "Sunset Yellow",
+    "status": "Mushbooh",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E129",
+    "name_kr": "적색40호",
+    "name_en": "Allura Red",
+    "status": "Mushbooh",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E133",
+    "name_kr": "청색1호",
+    "name_en": "Brilliant Blue",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E150",
+    "name_kr": "카라멜색소",
+    "name_en": "Caramel Color",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E200",
+    "name_kr": "소르빈산",
+    "name_en": "Sorbic Acid",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E210",
+    "name_kr": "안식향산",
+    "name_en": "Benzoic Acid",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E260",
+    "name_kr": "초산",
+    "name_en": "Acetic Acid",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E270",
+    "name_kr": "젖산",
+    "name_en": "Lactic Acid",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E290",
+    "name_kr": "이산화탄소",
+    "name_en": "Carbon Dioxide",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E300",
+    "name_kr": "비타민C",
+    "name_en": "Ascorbic Acid",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E322",
+    "name_kr": "레시틴",
+    "name_en": "Lecithin",
+    "status": "Mushbooh",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E322",
+    "name_kr": "대두레시틴",
+    "name_en": "Soy Lecithin",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E330",
+    "name_kr": "구연산",
+    "name_en": "Citric Acid",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E406",
+    "name_kr": "한천",
+    "name_en": "Agar",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E407",
+    "name_kr": "카라기난",
+    "name_en": "Carrageenan",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E410",
+    "name_kr": "로커스트콩검",
+    "name_en": "Locust Bean Gum",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E412",
+    "name_kr": "구아검",
+    "name_en": "Guar Gum",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E414",
+    "name_kr": "아라비아검",
+    "name_en": "Arabic Gum",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E415",
+    "name_kr": "잔탄검",
+    "name_en": "Xanthan Gum",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E440",
+    "name_kr": "펙틴",
+    "name_en": "Pectin",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E901",
+    "name_kr": "밀랍",
+    "name_en": "Beeswax",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "E903",
+    "name_kr": "카나우바왁스",
+    "name_en": "Carnauba Wax",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "VANILLA",
+    "name_kr": "바닐라추출물",
+    "name_en": "Vanilla Extract",
+    "status": "Mushbooh",
+    "risk_level": "Low"
+  },
+  {
+    "code": "CAFFEINE",
+    "name_kr": "카페인",
+    "name_en": "Caffeine",
+    "status": "Halal",
+    "risk_level": "Low"
+  },
+  {
+    "code": "BLOOD",
+    "name_kr": "선지",
+    "name_en": "Blood",
+    "status": "Haram",
+    "risk_level": "High"
+  },
+  {
+    "code": "BLOOD",
+    "name_kr": "혈액",
+    "name_en": "Blood Plasma",
+    "status": "Haram",
+    "risk_level": "High"
+  }
+]
