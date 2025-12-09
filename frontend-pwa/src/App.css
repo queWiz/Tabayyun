@@ -19,8 +19,9 @@ body {
 .app-container {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh; /* Changed from 100vh */
   background-color: black;
+  overflow: hidden; /* Stop scrolling/bouncing */
 }
 
 /* CAMERA LAYER */
@@ -70,7 +71,8 @@ body {
 /* HEADER / MODE SWITCHER */
 .mode-switcher-container {
   pointer-events: auto;
-  padding-top: 50px; /* Space for iPhone Notch */
+  /* Add padding for the "Notch" and Status Bar */
+  padding-top: max(50px, env(safe-area-inset-top)); 
   display: flex;
   justify-content: center;
 }
@@ -107,11 +109,13 @@ body {
 .scanner-controls {
   pointer-events: auto;
   width: 100%;
-  padding-bottom: 50px; /* Lift it up from bottom edge */
+  
+  /* Lift it up significantly so it sits ABOVE the address bar */
+  padding-bottom: 120px; 
+  
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Ensure it sits at the bottom of the flex container */
   margin-top: auto; 
 }
 

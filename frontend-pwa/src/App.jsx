@@ -150,7 +150,7 @@ function App() {
                 muted={true}
                 screenshotFormat="image/jpeg"
                 className="camera-feed"
-                videoConstraints={{ facingMode: "user" }}
+                videoConstraints={{ facingMode: "environment" }}
              />
              {mode === "visual" && <canvas ref={canvasRef} className="drawing-canvas" />}
            </>
