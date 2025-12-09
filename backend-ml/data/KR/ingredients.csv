@@ -1,0 +1,98 @@
+code,name_kr,name_en,status,risk_level
+E120,코치닐,Cochineal,Haram,High
+E120,연지벌레,Carmine,Haram,High
+E441,젤라틴,Gelatin,Mushbooh,High
+E542,골인산염,Bone Phosphate,Haram,High
+E904,쉘락,Shellac,Mushbooh,High
+E920,L-시스테인,L-Cysteine,Mushbooh,High
+E921,L-시스틴,L-Cystine,Mushbooh,High
+PORK,돼지고기,Pork,Haram,High
+PORK,돈육,Pork Meat,Haram,High
+PORK,돈지,Lard,Haram,High
+PORK,돈창,Pork Intestine,Haram,High
+PORK,베이컨,Bacon,Haram,High
+PORK,햄,Ham,Haram,High
+PORK,소시지,Sausage,Haram,High
+PORK,족발,Pork Trotters,Haram,High
+PORK,삼겹살,Pork Belly,Haram,High
+MEAT,고기,Meat,Mushbooh,Medium
+MEAT,육수,Meat Broth,Mushbooh,High
+MEAT,고기엑기스,Meat Extract,Mushbooh,High
+BEEF,쇠고기,Beef,Mushbooh,Medium
+BEEF,우육,Beef Meat,Mushbooh,Medium
+BEEF,우지,Beef Tallow,Mushbooh,High
+BEEF,사골,Beef Bone,Mushbooh,High
+CHICKEN,닭고기,Chicken,Mushbooh,Medium
+CHICKEN,계육,Chicken Meat,Mushbooh,Medium
+ALCOHOL,알코올,Alcohol,Haram,High
+ALCOHOL,에탄올,Ethanol,Haram,High
+ALCOHOL,주정,Spirit/Liquor,Haram,High
+ALCOHOL,술,Liquor,Haram,High
+ALCOHOL,와인,Wine,Haram,High
+ALCOHOL,럼,Rum,Haram,High
+ALCOHOL,브랜디,Brandy,Haram,High
+ALCOHOL,미림,Mirin,Haram,High
+ALCOHOL,맛술,Cooking Wine,Haram,High
+SHORTENING,쇼트닝,Shortening,Mushbooh,Medium
+MARGARINE,마가린,Margarine,Mushbooh,Medium
+RENNET,렌넷,Rennet,Mushbooh,Medium
+PEPSIN,펩신,Pepsin,Mushbooh,Medium
+WHEY,유청,Whey,Mushbooh,Low
+TAURINE,타우린,Taurine,Mushbooh,Low
+COLLAGEN,콜라겐,Collagen,Mushbooh,High
+E422,글리세린,Glycerol,Mushbooh,Medium
+E422,글리세롤,Glycerine,Mushbooh,Medium
+E470,지방산염,Fatty Acid Salts,Mushbooh,Medium
+E471,글리세린지방산에스테르,Mono-diglycerides,Mushbooh,Medium
+E472a,초산모노글리세리드,Acetic Acid Esters,Mushbooh,Medium
+E472b,젖산모노글리세리드,Lactic Acid Esters,Mushbooh,Medium
+E472c,구연산모노글리세리드,Citric Acid Esters,Mushbooh,Medium
+E472e,디아세틸타르타르산,DATEM,Mushbooh,Medium
+E473,자당지방산에스테르,Sucrose Esters,Mushbooh,Medium
+E474,수크로글리세리드,Sucroglycerides,Mushbooh,Medium
+E475,폴리글리세린지방산에스테르,Polyglycerol Esters,Mushbooh,Medium
+E476,폴리글리세린축합리시놀레인산에스테르,PGPR,Mushbooh,Medium
+E477,프로필렌글리콜지방산에스테르,Propylene Glycol Esters,Mushbooh,Medium
+E478,락틸산지방산글리세리드,Lactylated Glycerides,Mushbooh,Medium
+E481,스테아릴젖산나트륨,SSL,Mushbooh,Medium
+E482,스테아릴젖산칼슘,CSL,Mushbooh,Medium
+E483,스테아릴주석산,Stearyl Tartrate,Mushbooh,Medium
+E491,소르비탄모노스테아레이트,Sorbitan Monostearate,Mushbooh,Medium
+E492,소르비탄트리스테아레이트,Sorbitan Tristearate,Mushbooh,Medium
+E493,소르비탄모노라우레이트,Sorbitan Monolaurate,Mushbooh,Medium
+E494,소르비탄모노올레에이트,Sorbitan Monooleate,Mushbooh,Medium
+E495,소르비탄모노팔미테이트,Sorbitan Monopalmitate,Mushbooh,Medium
+E570,지방산,Fatty Acids,Mushbooh,Medium
+E572,스테아린산마그네슘,Magnesium Stearate,Mushbooh,Medium
+E631,이노신산나트륨,Disodium Inosinate,Mushbooh,High
+E635,5-리보뉴클레오티드이나트륨,Disodium Ribonucleotides,Mushbooh,High
+E640,글리신,Glycine,Mushbooh,Medium
+E100,강황,Curcumin,Halal,Low
+E101,리보플라빈,Riboflavin,Halal,Low
+E102,타르트라진,Tartrazine,Mushbooh,Low
+E110,황색5호,Sunset Yellow,Mushbooh,Low
+E129,적색40호,Allura Red,Mushbooh,Low
+E133,청색1호,Brilliant Blue,Halal,Low
+E150,카라멜색소,Caramel Color,Halal,Low
+E200,소르빈산,Sorbic Acid,Halal,Low
+E210,안식향산,Benzoic Acid,Halal,Low
+E260,초산,Acetic Acid,Halal,Low
+E270,젖산,Lactic Acid,Halal,Low
+E290,이산화탄소,Carbon Dioxide,Halal,Low
+E300,비타민C,Ascorbic Acid,Halal,Low
+E322,레시틴,Lecithin,Mushbooh,Low
+E322,대두레시틴,Soy Lecithin,Halal,Low
+E330,구연산,Citric Acid,Halal,Low
+E406,한천,Agar,Halal,Low
+E407,카라기난,Carrageenan,Halal,Low
+E410,로커스트콩검,Locust Bean Gum,Halal,Low
+E412,구아검,Guar Gum,Halal,Low
+E414,아라비아검,Arabic Gum,Halal,Low
+E415,잔탄검,Xanthan Gum,Halal,Low
+E440,펙틴,Pectin,Halal,Low
+E901,밀랍,Beeswax,Halal,Low
+E903,카나우바왁스,Carnauba Wax,Halal,Low
+VANILLA,바닐라추출물,Vanilla Extract,Mushbooh,Low
+CAFFEINE,카페인,Caffeine,Halal,Low
+BLOOD,선지,Blood,Haram,High
+BLOOD,혈액,Blood Plasma,Haram,High
