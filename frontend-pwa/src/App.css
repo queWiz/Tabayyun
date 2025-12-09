@@ -1,54 +1,90 @@
 /* RESET & FONTS */
 :root {
-  --primary: #007AFF; /* Apple Blue */
-  --danger: #FF3B30;  /* Apple Red */
-  --safe: #34C759;    /* Apple Green */
-  --bg-glass: rgba(255, 255, 255, 0.85);
-  --text-main: #000000;
-  --text-sub: #8E8E93;
+  --primary: #007AFF;
+  --danger: #FF3B30;
+  --safe: #34C759;
+  --bg-glass: rgba(255, 255, 255, 0.95);
+  --text-main: #111111; /* Pitch Black */
+  --text-sub: #666666;  /* Dark Gray */
 }
 
 body {
   margin: 0;
   background: black;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  overflow: hidden; /* Prevent scrolling */
+  overflow: hidden;
 }
 
 /* APP CONTAINER */
 .app-container {
   position: relative;
   width: 100vw;
-  height: 100dvh; /* Dynamic Height */
+  height: 100dvh;
   background-color: black;
   overflow: hidden;
 }
 
-/* Camera & Canvas */
+/* LAYERS */
 .camera-feed, .drawing-canvas {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  object-fit: contain; /* Ensure alignment */
+  object-fit: cover; /* Full screen for scanner */
   z-index: 1;
 }
 .drawing-canvas { z-index: 2; pointer-events: none; }
 
-/* Wrapper for Snapshot Alignment */
+/* SNAPSHOT VIEW */
 .snapshot-wrapper {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: black;
+  z-index: 5;
 }
-.snapshot-wrapper img, .snapshot-wrapper canvas {
-  width: 100%; height: 100%; object-fit: contain;
+.snapshot-wrapper img {
+  width: 100%; height: 100%; 
+  object-fit: contain;
+  opacity: 0.3; /* Dim it so text pops */
 }
 
-/* UI Layer */
+/* TRANSCRIPT OVERLAY (Matrix Style) */
+.text-overlay {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  width: 90%;
+  height: 45%; 
+  /* Dark Glass Effect */
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white; /* Text inside here is always white */
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.text-overlay h3 {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 1px;
+}
+
+.scrolled-text {
+  flex-grow: 1;
+  overflow-y: auto;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* UI LAYER & HEADER */
 .ui-layer {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -56,24 +92,19 @@ body {
   pointer-events: none;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Pushes content to edges */
+  justify-content: space-between;
 }
 
-/* Header Buttons */
 .mode-switcher-container {
   pointer-events: auto;
   padding-top: max(50px, env(safe-area-inset-top));
   display: flex;
   justify-content: center;
-  /* Ensure it stays at top */
-  position: absolute; 
-  top: 0; 
-  width: 100%;
-  z-index: 20;
+  position: absolute; top: 0; width: 100%; z-index: 20;
 }
 
 .mode-switcher {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
   padding: 4px;
   border-radius: 100px;
@@ -84,7 +115,7 @@ body {
 .mode-btn {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   padding: 8px 20px;
   border-radius: 100px;
   font-weight: 600;
@@ -96,110 +127,83 @@ body {
 .mode-btn.active {
   background: white;
   color: black;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* CAPTURE BUTTON AREA */
+/* CONTROLS */
 .scanner-controls {
   pointer-events: auto;
   width: 100%;
   padding-bottom: 80px; 
   display: flex;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
-  z-index: 20;
+  position: absolute; bottom: 0; z-index: 20;
 }
-/* THE SHUTTER BUTTON (iOS Style) */
+
 .capture-btn {
-  width: 70px;
-  height: 70px;
+  width: 72px; height: 72px;
   border-radius: 50%;
-  background-color: white; /* The inner white circle */
-  border: 4px solid rgba(0,0,0,0.5); /* Dark ring around it for contrast */
-  outline: 4px solid white; /* Outer white ring */
+  background-color: white;
+  border: 4px solid rgba(0,0,0,0.2);
+  outline: 4px solid white;
   outline-offset: 2px;
   cursor: pointer;
-  padding: 0;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   transition: transform 0.1s ease;
 }
+.capture-btn:active { transform: scale(0.9); }
 
-.capture-btn:active {
-  transform: scale(0.9);
-  background-color: #ddd;
-}
-
-/* RESULTS MODAL (Apple Style Sheet) */
+/* BOTTOM SHEET MODAL (High Contrast) */
 .result-modal {
   pointer-events: auto;
   position: absolute;
-  bottom: 0;        /* Anchor to bottom */
-  left: 0;
-  width: 100%;
+  bottom: 0; left: 0; width: 100%;
   
-  /* Styling */
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 20px 20px 0 0;
-  padding: 20px;
+  background: var(--bg-glass); /* Force White Background */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  border-radius: 24px 24px 0 0;
+  padding: 24px;
   box-sizing: border-box;
-  box-shadow: 0 -5px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.4);
   
-  /* SIZING: Never take more than 40% of screen */
   max-height: 40dvh; 
   display: flex;
   flex-direction: column;
   z-index: 50;
   
-  /* Animation */
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
-.results-list {
-  overflow-y: auto;
-  flex-grow: 1;
-  margin-bottom: 10px;
-  /* Add padding so text isn't cut off */
-  padding-bottom: 10px;
-}
-
-.results-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: var(--text-main); /* Force Black Text */
 }
 
 .results-header h3 {
   margin: 0;
   font-size: 20px;
   color: var(--text-main);
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-/* RESULT ITEMS */
+.results-list {
+  overflow-y: auto;
+  flex-grow: 1;
+  margin-bottom: 15px;
+}
+
+/* ITEMS */
 .safe-item {
-  background: rgba(52, 199, 89, 0.1);
-  color: var(--safe);
+  background: #E8F5E9; /* Light Green */
+  color: #1B5E20;      /* Dark Green Text */
   padding: 20px;
   border-radius: 12px;
   text-align: center;
   font-weight: 600;
-  border: 1px solid rgba(52, 199, 89, 0.2);
 }
 
 .risk-item {
   display: flex;
   flex-direction: column;
-  background: rgba(255, 59, 48, 0.08);
+  background: #FFEBEE; /* Light Red */
   border-left: 4px solid var(--danger);
   padding: 12px 16px;
   border-radius: 8px;
@@ -209,78 +213,36 @@ body {
 .risk-name {
   font-weight: 700;
   font-size: 16px;
-  color: var(--text-main);
+  color: #B71C1C; /* Dark Red Text */
 }
 
 .risk-detail {
   font-size: 13px;
-  color: var(--danger);
+  color: #D32F2F;
   margin-top: 4px;
 }
 
-/* CLOSE BUTTON */
+/* BUTTONS */
 .nice-close-btn {
   width: 100%;
   padding: 16px;
-  background: black;
+  background: #111;
   color: white;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  flex-shrink: 0;
 }
 
-.nice-close-btn:active {
-  opacity: 0.8;
+/* SPINNER */
+.spinner {
+  border: 3px solid rgba(0,0,0,0.1);
+  border-top: 3px solid #007AFF;
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px auto;
 }
-
-/* LOADING */
-.loading-screen {
-  position: absolute;
-  background: black;
-  width: 100%; height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  z-index: 100;
-}
-
-/* Text Transcript Overlay */
-.text-overlay {
-  position: absolute;
-  top: 10%;
-  left: 5%;
-  width: 90%;
-  height: 50%; /* Only take top half */
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 20px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  z-index: 10;
-}
-
-.text-overlay h3 {
-  margin-top: 0;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #aaa;
-  letter-spacing: 1px;
-}
-
-.scrolled-text {
-  flex-grow: 1;
-  overflow-y: auto;
-  margin-top: 10px;
-  /* Nice scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: #555 transparent;
-}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

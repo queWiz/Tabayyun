@@ -6,7 +6,6 @@ import { useIngredientScanner } from "./utils/useIngredientScanner";
 import "./App.css";
 import { HighlightedText } from "./utils/textHighlighter";
 
-
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null); 
@@ -19,18 +18,15 @@ function App() {
   
   const [snapshot, setSnapshot] = useState(null); 
 
-  const { scanImage, scanResult, boundingBoxes, isScanning, dbSize, extractedText } = useIngredientScanner();
+  const { scanImage, scanResult, extractedText, isScanning } = useIngredientScanner();
   const THRESHOLD = 0.50; 
 
   const videoConstraints = {
-    facingMode: { exact: "environment" }, // Force Back Camera
-    width: { ideal: 1280 },               // Ask for 720p (HD)
+    facingMode: "environment", 
+    width: { ideal: 1280 },
     height: { ideal: 720 }
   };
-  const [debugLog, setDebugLog] = useState("Ready.");
 
-
-  // 1. Load Resources
   useEffect(() => {
     const loadResources = async () => {
       try {
@@ -51,7 +47,6 @@ function App() {
     loadResources();
   }, []);
 
-  // 2. Visual Loop
   useEffect(() => {
     if (!model || loading || mode !== "visual" || snapshot) return;
     const interval = setInterval(() => detectFrame(), 100); 
@@ -90,12 +85,22 @@ function App() {
       const classKey = classNames[classId];
       const productInfo = productsDb[classKey];
       let color = productInfo ? productInfo.color : "white";
+      let label = productInfo ? productInfo.name_en : classKey;
+      
       ctx.strokeStyle = color;
       ctx.lineWidth = 4;
       ctx.strokeRect(finalX, finalY, finalW, finalH);
+      
+      // Draw Label Background
       ctx.fillStyle = color;
-      ctx.font = "18px Arial";
-      ctx.fillText(classKey, finalX + 5, finalY - 7);
+      ctx.font = "bold 16px sans-serif";
+      const text = ` ${label} `;
+      const textWidth = ctx.measureText(text).width;
+      ctx.fillRect(finalX, finalY - 26, textWidth, 26);
+      
+      // Draw Label Text
+      ctx.fillStyle = "black"; // Always black text on colored bg
+      ctx.fillText(text, finalX, finalY - 8);
     });
   };
 
@@ -103,9 +108,7 @@ function App() {
     const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc) {
       setSnapshot(imageSrc);
-      setDebugLog("Starting Scan..."); // Reset log
-      // Pass the setter as the callback
-      scanImage(imageSrc, (msg) => setDebugLog(msg));
+      scanImage(imageSrc);
     }
   }, [webcamRef, scanImage]);
 
@@ -119,89 +122,52 @@ function App() {
 
       <div style={{position: 'relative', width:'100%', height:'100%'}}>
         {snapshot ? (
-           /* SNAPSHOT VIEW */
            <div className="snapshot-wrapper">
-             {/* Show the photo the user took */}
-             <img src={snapshot} alt="Captured" style={{opacity: 0.4}} /> 
-             
-             {/* Show the TEXT TRANSCRIPT on top */}
+             <img src={snapshot} alt="Captured" /> 
              <div className="text-overlay">
-                <h3>📜 Detected Text:</h3>
+                <h3>Detected Text</h3>
                 <div className="scrolled-text">
                    <HighlightedText text={extractedText} risks={scanResult || []} />
                 </div>
              </div>
            </div>
         ) : (
-           /* LIVE VIEW */
            <>
              <Webcam
                 ref={webcamRef}
                 muted={true}
                 screenshotFormat="image/jpeg"
                 className="camera-feed"
-                videoConstraints={{ facingMode: "environment" }}
+                videoConstraints={videoConstraints}
              />
              {mode === "visual" && <canvas ref={canvasRef} className="drawing-canvas" />}
            </>
         )}
       </div>
 
-      <div style={{
-        position: 'absolute', 
-        top: '60px', 
-        left: '10px', 
-        zIndex: 999, 
-        color: 'lime', 
-        background: 'rgba(0,0,0,0.7)', 
-        padding: '5px',
-        fontSize: '10px',
-        maxWidth: '200px',
-        pointerEvents: 'none'
-      }}>
-        LOG: {debugLog}
-      </div>
-
       <div className="ui-layer">
-        
-        {/* 1. Header (Mode Switcher) */}
         {!snapshot && (
           <div className="mode-switcher-container">
             <div className="mode-switcher">
-              <button 
-                className={`mode-btn ${mode === 'visual' ? 'active' : ''}`} 
-                onClick={() => setMode('visual')}
-              >
-                Scanner
-              </button>
-              <button 
-                className={`mode-btn ${mode === 'text' ? 'active' : ''}`} 
-                onClick={() => setMode('text')}
-              >
-                Inspector
-              </button>
+              <button className={`mode-btn ${mode === 'visual' ? 'active' : ''}`} onClick={() => setMode('visual')}>Scanner</button>
+              <button className={`mode-btn ${mode === 'text' ? 'active' : ''}`} onClick={() => setMode('text')}>Inspector</button>
             </div>
           </div>
         )}
 
-        {/* 2. Capture Button (THE MISSING PART?) */}
-        {/* Only show in TEXT mode and when NOT showing a result */}
         {mode === "text" && !snapshot && (
           <div className="scanner-controls">
-            {/* We removed the camera emoji, the CSS now makes the shape */}
             <button className="capture-btn" onClick={handleCapture}></button>
           </div>
         )}
 
-        {/* 3. Loading Indicator */}
         {isScanning && (
-          <div className="result-modal" style={{textAlign:'center', paddingBottom: '30px'}}>
+          <div className="result-modal" style={{justifyContent: 'center', alignItems: 'center'}}>
             <div className="spinner"></div>
-            <h3>🔍 Analyzing Text...</h3>
+            <h3 style={{margin:0, color:'#333'}}>Analyzing Text...</h3>
           </div>
         )}
 
-        {/* 4. Results Modal */}
         {snapshot && !isScanning && (
            <div className="result-modal">
              <div className="results-header">
@@ -210,15 +176,21 @@ function App() {
              
              <div className="results-list">
                {(!scanResult || scanResult.length === 0) ? (
-                  <div className="safe-item">✅ Safe to Eat? (No risks found)</div>
+                  <div className="safe-item">
+                    ✅ Safe to Eat?
+                    <div style={{fontSize:'13px', fontWeight:'normal', marginTop:'5px', color:'#1B5E20'}}>
+                       No common haram ingredients detected.
+                    </div>
+                  </div>
                ) : (
                   <div>
-                    <p style={{color:'#c62828', fontWeight:'bold', margin:'0 0 10px 0'}}>
-                      ⚠️ Found {scanResult.length} Warnings:
+                    <p style={{fontSize:'13px', color:'#666', marginBottom:'10px'}}>
+                      Detected {scanResult.length} potential issues:
                     </p>
                     {scanResult.map((item, idx) => (
                       <div key={idx} className="risk-item">
-                        <strong>{item.name_en}</strong> ({item.status})
+                        <span className="risk-name">{item.name_en}</span>
+                        <span className="risk-detail">{item.status} ({item.code || "Ingredient"})</span>
                       </div>
                     ))}
                   </div>

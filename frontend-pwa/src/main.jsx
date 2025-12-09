@@ -8,7 +8,7 @@ import VConsole from 'vconsole';
 
 // Only load it in development or if you specifically want to debug production
 // For now, let's load it everywhere so you can debug on Vercel
-const vConsole = new VConsole();
+// const vConsole = new VConsole();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
