@@ -76,6 +76,7 @@ npm install
 
 # 3. Run Development Server
 npm run dev
+```
 
 *Note: To run the Python data pipeline, navigate to `backend-ml` and install `requirements.txt`.*
 
